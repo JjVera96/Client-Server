@@ -1,7 +1,7 @@
 import socket
 
-HOST = '192.168.10.185'
-PORT = 50001
+HOST = '192.168.8.229'
+PORT = 50002
 while True:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     envio = raw_input('Send to Server: ')
