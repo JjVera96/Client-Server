@@ -1,5 +1,4 @@
 import socket
-import random
 
 HOST = '192.168.8.229'
 PORT = 5500
