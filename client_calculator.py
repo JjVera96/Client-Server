@@ -1,6 +1,6 @@
 import socket
 
-HOST = '192.168.8.229'
+HOST = '192.168.17.12'
 PORT = 50002
 while True:
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

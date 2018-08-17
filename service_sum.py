@@ -1,12 +1,12 @@
 import socket
 
-HOST_MIDDLEWARE = '192.168.8.229'
-PORT_MIDDLEWARE  = 5500
+HOST_MIDDLEWARE = '192.168.11.157'
+PORT_MIDDLEWARE  = 5555
 
 s_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s_server.connect((HOST_MIDDLEWARE, PORT_MIDDLEWARE))
-data = s_server.recv(1024)
-print(data)
+#data = s_server.recv(1024)
+#print(data)
 s_server.send('+')
 while True:
     result = ''
