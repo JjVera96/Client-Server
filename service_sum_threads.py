@@ -19,9 +19,9 @@ class Sum():
     def operation(self, client, address):
         while True:
             result = ''
-            data = client.recv(1024).decode('ascii')
+            data = client.recv(1024)
             if not data: break
-            print(data)
+            print('Operation: {}'.format(data))
             if ',' in data:
                 op, op1, op2 = data.split(',')
                 if op == '+':
@@ -30,22 +30,27 @@ class Sum():
                     result = 'Match Error. Operation not supported. Struct for operation +,op,op without spaces.'
             else:
                 result = 'Match Error. Operation not supported. Struct for operation +,op,op without spaces.'
-            client.send(result.encode('ascii'))
+            print('Result: {}'.format(result))
+            client.send(result)
         client.close()
 
 def main():
-    port = 50002
-    number_connections = 10
-    host_middleware = '192.168.1.65'
-    port_middleware  = 5555
+    port = 50004
+    number_connections = 0
+    host_middleware = '192.168.11.157'
+    port_middleware  = 5500
     s_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s_server.connect((host_middleware, port_middleware))
-    s_server.send('+,{}'.format(port).encode('ascii'))
-    ip = s_server.recv(1024).decode('ascii')
+    my_id = s_server.recv(1024)
+    print(my_id)
+    s_server.send('+')
+    ip = s_server.recv(1024)
+    print(ip)
+    s_server.send(str(port))
     s_server.close()
-    
     sum = Sum(ip, port, number_connections)
     sum.listen()
+
 
 if __name__ == '__main__':
     main()
