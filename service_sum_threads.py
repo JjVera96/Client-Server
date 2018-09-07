@@ -37,10 +37,11 @@ class Sum():
 def main():
     port = 50004
     number_connections = 0
-    host_middleware = '192.168.11.157'
+    host_middleware = 'medio.calcseeking.com'
     port_middleware  = 5500
     s_server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s_server.connect((host_middleware, port_middleware))
+    print('Connected with {} in port {}'.format(host_middleware, port_middleware))
     my_id = s_server.recv(1024)
     print(my_id)
     s_server.send('+')
@@ -48,6 +49,7 @@ def main():
     print(ip)
     s_server.send(str(port))
     s_server.close()
+    print('Socket closed')
     sum = Sum(ip, port, number_connections)
     sum.listen()
 
