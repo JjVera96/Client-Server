@@ -2,8 +2,7 @@
 import pika
 import re
 
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='10.253.36.240'))
-
+connection = pika.BlockingConnection(pika.ConnectionParameters(host='192.168.1.60'))
 channel = connection.channel()
 channel.queue_declare(queue='+')
 
@@ -17,7 +16,8 @@ def callback(ch, method, properties, body):
 		queue_name, op1, op2 = data.split(', ')
 		result = str(int(op1) + int(op2))
 	else:
-		result = 'Match Error. Operation not supported. Struct for operation queue_name, op, op with spaces.'
+		queue_name, other = data.split(', ', 1)
+		result = 'Match Error. Struct for operation queue_name, op, op with spaces.'		
 	print(result)
 	try:
 		channel.basic_publish(exchange='', routing_key=queue_name, body=result)
