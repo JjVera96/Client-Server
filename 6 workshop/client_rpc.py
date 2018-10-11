@@ -30,10 +30,10 @@ class SumRpcClient(object):
                                    body=str(n))
         while self.response is None:
             self.connection.process_data_events()
-        return int(self.response)
+        return self.response
 
 sum_rpc = SumRpcClient()
 
 message = input('Input numbers x, y: ')
 response =  sum_rpc.call(message)
-print(" [.] Got %r" % response)
+print(' [.] ', response.decode())
