@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import pika
+import re
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(host='192.168.1.60'))
 channel = connection.channel()
@@ -9,14 +10,16 @@ pattern = re.compile("[\d]+, [\d]+")
 def sum(data):
     if pattern.match(data):
         op1, op2 = data.split(', ')
-        return str(int(op1) + int(op2))
+        result = str(int(op1) + int(op2))
     else:
-        return 'Match Error. Struct for operation queue_name, op, op with spaces.'
+        result = 'Match Error. Struct for operation queue_name, op, op with spaces.'
+    print(result)
+    return result
 
 def on_request(ch, method, props, body):
-    data = str(body)
+    data = body.decode()
 
-    print(" [.] sum(%s)" % data)
+    print(' [.] ', data)
     response = sum(data)
 
     ch.basic_publish(exchange='',
