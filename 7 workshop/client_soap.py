@@ -1,4 +1,10 @@
 from suds.client import Client
 
-client = Client('http://192.168.1.63:8000/?wsdl', cache=None)
-print(client.service.sum(4, 5))
+client = Client('http://10.253.22.235:8000/?wsdl', cache=None)
+
+
+while True:
+	x = input('Input number x: ')
+	if x == '': break
+	y = input('Input number y: ')
+	print(client.service.sum(x, y))
