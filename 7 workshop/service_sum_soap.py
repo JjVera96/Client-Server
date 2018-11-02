@@ -11,10 +11,7 @@ class SumService(ServiceBase):
         result = op1 + op2
         return result
 
-application = Application([SumService],
-                        tns='cs.sum',
-                        in_protocol=Soap11(validator='lxml'),
-                        out_protocol=Soap11())
+application = Application([SumService], tns='cs.sum', in_protocol=Soap11(validator='lxml'), out_protocol=Soap11())
 
 if __name__ == '__main__':
     wsgi_app = WsgiApplication(application)
