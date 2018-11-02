@@ -1,5 +1,4 @@
-
 from suds.client import Client
 
-client = Client('http://localhost:8000/?wsdl', cache=None)
-print(client.service.say_hello(u'Hola', 5))
+client = Client('http://192.168.1.63:8000/?wsdl', cache=None)
+print(client.service.sum(4, 5))
